@@ -20,11 +20,13 @@ int main() {
 	// generate grid
 	int cols = 10, rows = 10;
 
-	std::cout << "Set Width: \n";
+	std::cout << "Set Width: ";
 	std::cin >> cols;
+	std::cout << '\n';
 
-	std::cout << "Set Height: \n";
+	std::cout << "Set Height: ";
 	std::cin >> rows;
+	std::cout << '\n';
 
 	for (int x = 0; x < cols; x++) {
 		std::vector<Cell*> yGrid;
@@ -126,7 +128,7 @@ int main() {
 	int width = (cols * 2) + 1;
 	int height = (rows * 2) + 1;
 
-	Image maze(width, height, 1);
+	Image maze(width, height, 3);
 
 	for (int x = 0; x < cols; x++) {
 		for (int y = 0; y < rows; y++) {
@@ -134,26 +136,36 @@ int main() {
 			int pixelY = y * 2 + 1;
 
 			int index = maze.GetIndex(pixelX, pixelY);
-			maze.SetData(index, (uint8_t)255);
+			maze.SetData(index + 0, (uint8_t)255);
+			maze.SetData(index + 1, (uint8_t)255);
+			maze.SetData(index + 2, (uint8_t)255);
 
 			if (grid[x][y]->GetSide(Side::UP)) {
 				index = maze.GetIndex(pixelX, pixelY - 1);
-				maze.SetData(index, (uint8_t)255);
+				maze.SetData(index + 0, (uint8_t)255);
+				maze.SetData(index + 1, (uint8_t)255);
+				maze.SetData(index + 2, (uint8_t)255);
 			}
 
 			if (grid[x][y]->GetSide(Side::DOWN)) {
 				index = maze.GetIndex(pixelX, pixelY + 1);
-				maze.SetData(index, (uint8_t)255);
+				maze.SetData(index + 0, (uint8_t)255);
+				maze.SetData(index + 1, (uint8_t)255);
+				maze.SetData(index + 2, (uint8_t)255);
 			}
 
 			if (grid[x][y]->GetSide(Side::RIGHT)) {
 				index = maze.GetIndex(pixelX + 1, pixelY);
-				maze.SetData(index, (uint8_t)255);
+				maze.SetData(index + 0, (uint8_t)255);
+				maze.SetData(index + 1, (uint8_t)255);
+				maze.SetData(index + 2, (uint8_t)255);
 			}
 
 			if (grid[x][y]->GetSide(Side::LEFT)) {
 				index = maze.GetIndex(pixelX - 1, pixelY);
-				maze.SetData(index, (uint8_t)255);
+				maze.SetData(index + 0, (uint8_t)255);
+				maze.SetData(index + 1, (uint8_t)255);
+				maze.SetData(index + 2, (uint8_t)255);
 			}
 		}
 	}
