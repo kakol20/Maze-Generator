@@ -11,6 +11,13 @@ public:
 	Cell(const int col, const int row);
 
 	bool GetSide(Side side);
+	void SetSide(const bool flag, const Side side);
+
+	bool GetVisited();
+	void SetVisited(const bool flag);
+
+	int GetX();
+	int GetY();
 
 	~Cell();
 
@@ -22,6 +29,8 @@ private:
 	bool m_right = false;
 	bool m_down = false;
 	bool m_left = false;
+
+	bool m_visited = false;
 };
 
 #endif // !CELL_H

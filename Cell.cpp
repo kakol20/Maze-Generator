@@ -31,5 +31,41 @@ bool Cell::GetSide(Side side) {
 	return false;
 }
 
+void Cell::SetSide(const bool flag, const Side side) {
+	switch (side) {
+	case Side::UP:
+		m_up = flag;
+		break;
+
+	case Side::RIGHT:
+		m_right = flag;
+		break;
+
+	case Side::DOWN:
+		m_down = flag;
+		break;
+
+	case Side::LEFT:
+		m_left = flag;
+		break;
+	}
+}
+
+void Cell::SetVisited(const bool flag) {
+	m_visited = flag;
+}
+
+bool Cell::GetVisited() {
+	return m_visited;
+}
+
+int Cell::GetX() {
+	return m_col;
+}
+
+int Cell::GetY() {
+	return m_row;
+}
+
 Cell::~Cell() {
 }
