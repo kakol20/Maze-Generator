@@ -11,14 +11,26 @@ std::vector<std::vector<Cell*>> grid;
 unsigned int LinearFeedbackShift::Seed = 0;
 
 int main() {
-	// use epoch time as seed
-	std::time_t currentTime = time(0);
-	LinearFeedbackShift::Seed = static_cast<unsigned int>(currentTime);
+	// Seed for LFSR
+	unsigned int seed = 0;
+	std::cout << "Set Seed: ";
+	std::cin >> seed;
+	std::cout << '\n';
+
+	if (seed == 0) {
+		std::time_t currentTime = time(0);
+		LinearFeedbackShift::Seed = static_cast<unsigned int>(currentTime);
+	}
+	else {
+		LinearFeedbackShift::Seed = seed;
+	}
 
 	int side = (int)Side::DOWN;
 
 	// generate grid
 	int cols = 10, rows = 10;
+
+	// 16 * 3 = 48, 9 * 3 = 27
 
 	std::cout << "Set Width: ";
 	std::cin >> cols;
@@ -40,12 +52,11 @@ int main() {
 
 	// generate maze
 	std::vector<Cell*> stack;
-	grid[0][0]->SetVisited(true);
+	int currentX = (int)floorf(LinearFeedbackShift::RandF() * (float)cols);
+	int currentY = (int)floorf(LinearFeedbackShift::RandF() * (float)rows);
 
-	int currentX = 0;
-	int currentY = 0;
-
-	stack.push_back(grid[0][0]);
+	grid[currentX][currentY]->SetVisited(true);
+	stack.push_back(grid[currentX][currentY]);
 
 	while (!stack.empty()) {
 		// Pop a cell from the stack and make it a current cell
