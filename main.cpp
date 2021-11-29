@@ -13,7 +13,7 @@ unsigned int LinearFeedbackShift::Seed = 0;
 int main() {
 	// Seed for LFSR
 	unsigned int seed = 0;
-	std::cout << "Set Seed: ";
+	std::cout << "Set Seed: "; // 314159265
 	std::cin >> seed;
 	std::cout << '\n';
 
@@ -32,11 +32,11 @@ int main() {
 
 	// 16 * 3 = 48, 9 * 3 = 27
 
-	std::cout << "Set Width: ";
+	std::cout << "Set Width: "; // 96
 	std::cin >> cols;
 	std::cout << '\n';
 
-	std::cout << "Set Height: ";
+	std::cout << "Set Height: "; // 54
 	std::cin >> rows;
 	std::cout << '\n';
 
@@ -52,8 +52,8 @@ int main() {
 
 	// generate maze
 	std::vector<Cell*> stack;
-	int currentX = (int)floorf(LinearFeedbackShift::RandF() * (float)cols);
-	int currentY = (int)floorf(LinearFeedbackShift::RandF() * (float)rows);
+	int currentX = 0;
+	int currentY = 0;
 
 	grid[currentX][currentY]->SetVisited(true);
 	stack.push_back(grid[currentX][currentY]);
@@ -92,7 +92,7 @@ int main() {
 			stack.push_back(grid[currentX][currentY]);
 
 			// Choose one of the unvisited neighbours
-			float random = LinearFeedbackShift::RandFRange(0.0f, (float)(neighbours.size()));
+			float random = LinearFeedbackShift::RandFRange(0.0f, (float)(neighbours.size()), 3);
 			int index = (int)floorf(random);
 			Side chosen = neighbours[index];
 
