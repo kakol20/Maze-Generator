@@ -92,8 +92,8 @@ int main() {
 			stack.push_back(grid[currentX][currentY]);
 
 			// Choose one of the unvisited neighbours
-			float random = LinearFeedbackShift::RandFRange(0.0f, (float)(neighbours.size()), 3);
-			int index = (int)floorf(random);
+			float random = LinearFeedbackShift::RandFloatRange(0.0f, (float)(neighbours.size() - 1), 3);
+			int index = (int)roundf(random);
 			Side chosen = neighbours[index];
 
 			// Remove the wall between the current cell and the chosen cell
