@@ -192,7 +192,7 @@ int main() {
 	}
 	grid.clear();
 
-	system("pause");
+	//system("pause");
 
 	return 0;
 }

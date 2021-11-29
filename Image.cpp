@@ -191,7 +191,9 @@ void Image::SetData(int index, float data)
 
 Image::~Image()
 {
-	stbi_image_free(m_data);
+	//stbi_image_free(m_data);
+	delete m_data;
+	m_data = nullptr;
 
 	delete m_dataF;
 	m_dataF = nullptr;
@@ -222,6 +224,9 @@ ImageType Image::GetFileType(const char* fileName)
 			return ImageType::TGA;
 		}
 	}
+	
+	delete ext;
+	ext = nullptr;
 
 	return ImageType::PNG;
 }
