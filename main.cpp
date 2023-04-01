@@ -69,22 +69,22 @@ int main() {
 
 		// up
 		if (currentY != 0) {
-			if (!grid[currentX][currentY - 1]->GetVisited()) neighbours.push_back(Side::UP);
+			if (!grid[currentX][(size_t)currentY - 1]->GetVisited()) neighbours.push_back(Side::UP);
 		}
 
 		// down
 		if (currentY < rows - 1) {
-			if (!grid[currentX][currentY + 1]->GetVisited()) neighbours.push_back(Side::DOWN);
+			if (!grid[currentX][(size_t)currentY + 1]->GetVisited()) neighbours.push_back(Side::DOWN);
 		}
 
 		// left
 		if (currentX != 0) {
-			if (!grid[currentX - 1][currentY]->GetVisited()) neighbours.push_back(Side::LEFT);
+			if (!grid[(size_t)currentX - 1][currentY]->GetVisited()) neighbours.push_back(Side::LEFT);
 		}
 
 		// right
 		if (currentX < cols - 1) {
-			if (!grid[currentX + 1][currentY]->GetVisited()) neighbours.push_back(Side::RIGHT);
+			if (!grid[(size_t)currentX + 1][currentY]->GetVisited()) neighbours.push_back(Side::RIGHT);
 		}
 
 		if (!neighbours.empty()) {
@@ -100,31 +100,31 @@ int main() {
 			grid[currentX][currentY]->SetSide(true, chosen);
 			switch (chosen) {
 			case Side::DOWN:
-				grid[currentX][currentY + 1]->SetSide(true, Side::UP);
-				grid[currentX][currentY + 1]->SetVisited(true);
+				grid[currentX][(size_t)currentY + 1]->SetSide(true, Side::UP);
+				grid[currentX][(size_t)currentY + 1]->SetVisited(true);
 
-				stack.push_back(grid[currentX][currentY + 1]);
+				stack.push_back(grid[currentX][(size_t)currentY + 1]);
 				break;
 
 			case Side::LEFT:
-				grid[currentX - 1][currentY]->SetSide(true, Side::RIGHT);
-				grid[currentX - 1][currentY]->SetVisited(true);
+				grid[(size_t)currentX - 1][currentY]->SetSide(true, Side::RIGHT);
+				grid[(size_t)currentX - 1][currentY]->SetVisited(true);
 
-				stack.push_back(grid[currentX - 1][currentY]);
+				stack.push_back(grid[(size_t)currentX - 1][currentY]);
 				break;
 
 			case Side::RIGHT:
-				grid[currentX + 1][currentY]->SetSide(true, Side::LEFT);
-				grid[currentX + 1][currentY]->SetVisited(true);
+				grid[(size_t)currentX + 1][currentY]->SetSide(true, Side::LEFT);
+				grid[(size_t)currentX + 1][currentY]->SetVisited(true);
 
-				stack.push_back(grid[currentX + 1][currentY]);
+				stack.push_back(grid[(size_t)currentX + 1][currentY]);
 				break;
 
 			case Side::UP:
-				grid[currentX][currentY - 1]->SetSide(true, Side::DOWN);
-				grid[currentX][currentY - 1]->SetVisited(true);
+				grid[currentX][(size_t)currentY - 1]->SetSide(true, Side::DOWN);
+				grid[currentX][(size_t)currentY - 1]->SetVisited(true);
 
-				stack.push_back(grid[currentX][currentY - 1]);
+				stack.push_back(grid[currentX][(size_t)currentY - 1]);
 				break;
 			}
 		}
@@ -132,7 +132,7 @@ int main() {
 
 	// set entry and exit
 	grid[0][0]->SetSide(true, Side::UP);
-	grid[cols - 1][rows - 1]->SetSide(true, Side::DOWN);
+	grid[(size_t)cols - 1][(size_t)rows - 1]->SetSide(true, Side::DOWN);
 
 	// save maze as image
 	int width = (cols * 2) + 1;

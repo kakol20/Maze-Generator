@@ -52,7 +52,8 @@ int LinearFeedbackShift::RandInt(const unsigned int bitCount) {
 	unsigned int negative = RandUInt(1);
 
 	for (int i = bitCount - 2; i >= 0; i--) {
-		out = out | (LinearFeedbackShift::RandUInt(1) << i);
+		//out = out | (LinearFeedbackShift::RandUInt(1) << i);
+		out = LinearFeedbackShift::RandInt(bitCount - 1);
 	}
 
 	if (negative == 0b1) out = -out;
@@ -78,9 +79,11 @@ unsigned int LinearFeedbackShift::RandUInt(const unsigned int bitCount) {
 	unsigned int out = 0;
 
 	for (int i = bitCount - 1; i >= 0; i--) {
+		if (LinearFeedbackShift::Seed == 0) LinearFeedbackShift::Seed = 0b1;
+
 		out = out | ((LinearFeedbackShift::Seed & 0b1) << i);
 
-		unsigned int newBit = LinearFeedbackShift::Seed & (LinearFeedbackShift::Seed >> 1) ^ (LinearFeedbackShift::Seed >> 2) ^ (LinearFeedbackShift::Seed >> 22);
+		unsigned int newBit = LinearFeedbackShift::Seed ^ (LinearFeedbackShift::Seed >> 1) ^ (LinearFeedbackShift::Seed >> 2) ^ (LinearFeedbackShift::Seed >> 22);
 		newBit = newBit & 1;
 
 		LinearFeedbackShift::Seed = (LinearFeedbackShift::Seed >> 1) | (newBit << 31);
